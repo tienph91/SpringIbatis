@@ -32,7 +32,7 @@ public class AppConfig {
     }
 
     // đọc thông tin file cấu hình MyBatis
-    @Bean
+    @Bean(name="sqlSessionFactory")
     public SqlSessionFactoryBean sqlSessionFactory() throws Exception {
         Resource resource = new ClassPathResource("SqlMapConfig.xml");
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
@@ -43,7 +43,7 @@ public class AppConfig {
 
     // scan tất cả những mapper package vn.viettuts.mapper
     @Bean
-    public MapperScannerConfigurer mapperScannerConfigurer() {
+    public MapperScannerConfigurer mapperScannerConfigurer1() {
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
         mapperScannerConfigurer.setBasePackage("tienph.mapper");
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
