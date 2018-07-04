@@ -2,6 +2,8 @@ package mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
+
 import entity.Student;
 
 public interface StudentMapper {
@@ -11,6 +13,7 @@ public interface StudentMapper {
 
     int deleteById(int id);
 
+    @Select("select * from student")
     List<Student> selectAll();
 
     Student selectById(int id);
