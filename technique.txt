@@ -3,3 +3,13 @@ MySQL 5.0.11
 JDK 1.8
 MyBatis 3.3.0
 Spring 4.3.6
+
+
+B1. Tạo file application.properties.
+B2. Tạo bảng student
+B3. Tạo entity Student(POJO)
+B4. Ibatis: Tạo mapper Student.xml để map trường và cột. 1 interface StudentMapper để call Student.xml method
+B5. Tạo SqlMapConfig.xml để map Entity và mapper Student.xml
+B6. Tạo appconfig để đọc cấu hình của *.properties, SqlMapConfig.xml, Scan các mapper.
+B7. Tạo service Impl để sử dụng studentMapper call các service tương ứng.
+B8. Test
