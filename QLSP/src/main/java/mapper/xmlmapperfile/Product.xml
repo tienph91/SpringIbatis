@@ -1,0 +1,42 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.ProductMapper">
+
+	<resultMap id="result" type="ProductResult">
+		<result property="productId" column="productId" />
+		<result property="productName" column="productNAME" />
+		<result property="productDetailId" column="productDetailId" />
+		<result property="quantity" column="quantity" />
+		<result property="color" column="color" />
+		<result property="address" column="address" />
+	</resultMap>
+
+	<select id="getListProduct" resultMap="result">
+		SELECT P.ProductId, productName, productDetailId, quantity, color, address
+		FROM PRODUCT P
+		INNER JOIN PRODUCTDETAIL PD ON P.ProductId = PD.ProductId
+	</select>
+	<select id="getProductDetailByProductId" 
+		resultType="ProductDetail">
+		SELECT P.ProductId, productName, productDetailId, quantity, color, address
+		FROM PRODUCT P
+		INNER JOIN PRODUCTDETAIL PD ON P.ProductId = PD.ProductId
+			WHERE p.productId = #{productId}
+	</select>
+	<select id="getMaxQuantityProduct" resultMap="result">
+		SELECT P.ProductId, productDetailId, quantity, color, address
+		FROM PRODUCT P
+		INNER JOIN ProductDetail PD ON P.ProductId = PD.ProductId
+		WHERE quantity = (SELECT MAX(quantity) FROM ProductDetail)
+	</select>
+	<select id="searchProductByName" resultMap="result" parameterType="String">
+		SELECT P.ProductId, productName, productDetailId, quantity, color, address
+		FROM PRODUCT P
+		INNER JOIN ProductDetail PD ON P.ProductId = PD.ProductId
+	      <if test = "_parameter != null">
+	         WHERE productName LIKE #{_parameter}
+	      </if>
+	    
+	</select>
+</mapper>
