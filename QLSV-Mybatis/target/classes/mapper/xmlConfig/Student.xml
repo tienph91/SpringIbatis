@@ -1,7 +1,7 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.StudentMapper">
+<mapper namespace="Student1">
 	<select id="getListAllStudent" resultMap="result">
 		Select * From Student
 	</select>
@@ -24,7 +24,10 @@
 		phone = #{phone}
 		Where id = #{id}
 	</update>
-
+	<select id="readRecordById" resultMap="result" parameterType="int"
+		statementType="CALLABLE">
+		{call read_recordById(#{id, jdbcType = INTEGER, mode = IN})}
+	</select>
 	<resultMap id="result" type="Student">
 		<result property="age" column="age" />
 		<result property="address" column="address" />
